@@ -66,7 +66,95 @@ The `LocalePreferences` contract functions as a proxy for `tx.origin`.
                                                               +--------------+
 ```
 
-### Example Contracts
+### Localization
+<!--Check out 902  -->
+
+#### Methods
+
+##### set
+
+What it's about yadda yadda
+
+```solidity
+function set(bytes32 _code, string _message) external nonpayable {
+```
+
+##### stringFor
+What it's about yadda yadda
+
+```solidity
+function stringFor(bytes32 _code) external nonpayable returns (bool _wasFound, string _message) {
+```
+
+### Interface
+
+```solidity
+interface Localization {
+  function set(bytes32 _code, string _message) external nonpayable
+  function stringFor(bytes32 _code) external nonpayable returns (bool _wasFound, string _message)
+}
+```
+
+## LocalePreferences
+
+### Interface
+
+```solidity
+interface LocalePreferences {
+  function set(Localization _localization) external nonpayable returns (bool)
+  function get(bytes32 _code) external nonpayable returns (bool, string)
+
+  // Maybe
+  function get(bytes32 _code, address _who) external nonpayable returns (bool, string)
+}
+```
+
+## Base String Format
+
+* UTF8
+* Super compatible with everything, all the languages, emoji, &c
+
+## Format Strings
+
+It can be very useful to insert use-case-specific data in a string
+
+A user may want a high level message without detailed information.
+They then just don't include the argument in the template, and it'll be ignored.
+Other users will still get the data inserted.
+
+The returned strings may either be simple strings, or contain
+
+* String concatenation and interpolation on chain is notoriously expensive and inefficient
+* Return a common format (probably IEEE Std 1003.1 / printf)
+  * http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html
+  * Downside is that we're passing around type info. Useful when in JSON, &c
+    * but not strictly needed? Maybe?
+
+```solidity
+"%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
+```
+
+```solidity
+("%1s is an element with the atomic number %2d!", atomName, atomicNumber)
+
+// For example
+("%1s is an element with the atomic number %2d!", "Mercury", 80);
+// => "Mercury is an element with the atomic number 80!"
+```
+
+
+## Rationale
+<!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
+
+* Why `bytes32` keys?
+* Should not be locked into a specific UI
+* Should be compatible with `revert`
+* Return a bool, because it *is* just a boolean (found or not)
+
+## Implementation
+<!--The implementations must be completed before any EIP is given status "Final", but it need not be completed before the EIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
+
+Link to the main Eth status codes repo. But for now...
 
 ```solidity
 contract Localization {
@@ -124,53 +212,6 @@ contract LocalePreferences {
   }
 }
 ```
-
-## Base String Format
-
-* UTF8
-* Super compatible with everything, all the languages, emoji, &c
-
-## Format Strings
-
-It can be very useful to insert use-case-specific data in a string
-
-A user may want a high level message without detailed information.
-They then just don't include the argument in the template, and it'll be ignored.
-Other users will still get the data inserted.
-
-The returned strings may either be simple strings, or contain
-
-* String concatenation and interpolation on chain is notoriously expensive and inefficient
-* Return a common format (probably IEEE Std 1003.1 / printf)
-  * http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html
-  * Downside is that we're passing around type info. Useful when in JSON, &c
-    * but not strictly needed? Maybe?
-
-```solidity
-"%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
-```
-
-```solidity
-("%1s is an element with the atomic number %2d!", atomName, atomicNumber)
-
-// For example
-("%1s is an element with the atomic number %2d!", "Mercury", 80);
-// => "Mercury is an element with the atomic number 80!"
-```
-
-
-## Rationale
-<!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
-
-* Why `bytes32` keys?
-* Should not be locked into a specific UI
-* Should be compatible with `revert`
-* Return a bool, because it *is* just a boolean (found or not)
-
-## Implementation
-<!--The implementations must be completed before any EIP is given status "Final", but it need not be completed before the EIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
-
-Link to the main Eth status codes repo
 
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
