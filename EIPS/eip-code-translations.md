@@ -33,6 +33,7 @@ By allowing users to register their own translations .............
 
 * User feedback is abysmal
 * Want this to be a truly global system
+* Abstracted out of ERC1066, but can also be slightly more general
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum platforms (go-ethereum, parity, cpp-ethereum, ethereumj, ethereumjs, and [others](https://github.com/ethereum/wiki/wiki/Clients)).-->
@@ -41,11 +42,41 @@ By allowing users to register their own translations .............
 
 Two types of contract: a `LocalePreferences`, and `Localization`s.
 
+The `LocalePreferences` contract functions as a proxy for `tx.origin`.
+
+```diagram
+                                                              +--------------+
+                                                              |              |
+                                                        +---> | Localization |
+                                                        |     |              |
+                                                        |     +--------------+
+                                                        |
+                                                        |
++-----------+              +-------------------+        |     +--------------+
+|           |              |                   | <------+     |              |
+| Requestor | <----------> | LocalePreferences | <----------> | Localization |
+|           |              |                   | <------+     |              |
++-----------+              +-------------------+        |     +--------------+
+                                                        |
+                                                        |
+                                                        |     +--------------+
+                                                        |     |              |
+                                                        +---> | Localization |
+                                                              |              |
+                                                              +--------------+
+```
+
+### Example Contracts
+
 ```solidity
 contract Localization {
+  string public missing;
+
   mapping(bytes32 => string) private dictionary_;
 
-  constructor() public {}
+  constructor(string _missing) public {
+    missing = _missing;
+  }
 
   // Currently overwrites anything
   function set(bytes32 _code, string _message) external nonpayable {
@@ -53,24 +84,21 @@ contract Localization {
     return true;
   }
 
-  function get(bytes32 _code) external nonpayable returns (bool, string) {
-
-  }
-
-  function fallback() public nonpayable returns (string) {
+  function stringFor(bytes32 _code) external nonpayable returns (bool _wasFound, string _message) {
+    if (dictionary_[_code] == "") {
+      return missing;
+    } else {
+      return dictionary_[_code];
+    }
   }
 }
 
 contract LocalePreferences {
   mapping(address => address) private registry_;
-  address private defaultLocale_;
+  address public defaultLocale;
 
   constructor(Localization _defaultLocale) public {
-    defaultLocale_ = _defaultLocale;
-  }
-
-  function getDefault() public returns (Localization) {
-    return defaultLocale_;
+    defaultLocale = _defaultLocale;
   }
 
   // Should return a true or hex"01"?
@@ -79,25 +107,70 @@ contract LocalePreferences {
     return true;
   }
 
-  // Maaaaaybe too big?
   function get(bytes32 _code) external nonpayable returns (string) {
-    return registry_[tx.origin].get(_code);
+    return get(tx.origin);
+  }
+
+  function get(bytes32 _code, address _who) external nonpayable returns (string) {
+    return getLocale(_who).stringFor(_code);
+  }
+
+  function getLocaleFor(address _who) internal returns (Localization) {
+    if (registry_[_who_] == Localization(0)) {
+      return getDefault();
+    } else {
+      return registry_[tx.origin];
+    }
   }
 }
 ```
 
-## Template Strings
+## Base String Format
+
+* UTF8
+* Super compatible with everything, all the languages, emoji, &c
+
+## Format Strings
+
+It can be very useful to insert use-case-specific data in a string
+
+A user may want a high level message without detailed information.
+They then just don't include the argument in the template, and it'll be ignored.
+Other users will still get the data inserted.
 
 The returned strings may either be simple strings, or contain
+
+* String concatenation and interpolation on chain is notoriously expensive and inefficient
+* Return a common format (probably IEEE Std 1003.1 / printf)
+  * http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html
+  * Downside is that we're passing around type info. Useful when in JSON, &c
+    * but not strictly needed? Maybe?
+
+```solidity
+"%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
+```
+
+```solidity
+("%1s is an element with the atomic number %2d!", atomName, atomicNumber)
+
+// For example
+("%1s is an element with the atomic number %2d!", "Mercury", 80);
+// => "Mercury is an element with the atomic number 80!"
+```
+
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
 
+* Why `bytes32` keys?
 * Should not be locked into a specific UI
 * Should be compatible with `revert`
+* Return a bool, because it *is* just a boolean (found or not)
 
 ## Implementation
 <!--The implementations must be completed before any EIP is given status "Final", but it need not be completed before the EIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
+
+Link to the main Eth status codes repo
 
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
