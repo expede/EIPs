@@ -107,7 +107,7 @@ contract LocalePreferences {
     return true;
   }
 
-  function get(bytes32 _code) external nonpayable returns (string) {
+  function get(bytes32 _code) external nonpayable returns (bool, string) {
     return get(_code, _tx.origin);
   }
 
