@@ -111,7 +111,7 @@ contract LocalePreferences {
     return get(_code, _tx.origin);
   }
 
-  function get(bytes32 _code, address _who) external nonpayable returns (string) {
+  function get(bytes32 _code, address _who) external nonpayable returns (bool, string) {
     return getLocale(_who).stringFor(_code);
   }
 
