@@ -1,7 +1,7 @@
 ---
 eip: <to be assigned>
-title: Human-Readable Signal Representation Archetecture
-author: Brooklyn Zelenka (@expede), Jennifer Cooper (@jncoops)
+title: Human-Readable Signal Representation Architecture
+author: Brooklyn Zelenka (@expede), Jennifer Cooper (@jenncoop)
 discussions-to: <URL>
 status: Draft
 type: Standards Track
@@ -17,7 +17,7 @@ If you can't explain it simply, you don't understand it well enough."
 Provide a simplified and layman-accessible explanation of the EIP.
 
 An on-chain system for registering and converting machine-efficient codes into
-human-readable strings in arbitrary languages
+human-readable strings in arbitrary languages.
 
 ## Abstract
 A short (~200 word) description of the technical issue being addressed.
