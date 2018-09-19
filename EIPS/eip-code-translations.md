@@ -70,7 +70,7 @@ The `LocalePreferences` contract functions as a proxy for `tx.origin`.
 
 ### `Localization`
 
-Top-level discussion here
+A `Localization` contract is meant to maintain a mapping of codes to human-readable strings. There should be a `Localization` contract for each language a developer wants to support.
 
 ```solidity
 interface Localization {
@@ -81,7 +81,7 @@ interface Localization {
 
 #### `set`
 
-Set a human-readable message for any given ERC1066 status code.
+Set a human-readable string for the given code.
 
 ```solidity
 function set(bytes32 _code, string _message) external nonpayable {
@@ -89,7 +89,7 @@ function set(bytes32 _code, string _message) external nonpayable {
 
 #### `stringFor`
 
-Retrieve the human-readable message for any given ERC1066 status code.
+Get the human-readable string for any given code. Returns the `bool` retrieval status, as well as the message itself, if found, otherwise an empty string.
 
 ```solidity
 function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
@@ -97,7 +97,7 @@ function stringFor(bytes32 _code) external view returns (bool _wasFound, string 
 
 ### `LocalePreferences`
 
-Top level discussion here
+A `LocalPreferences` contract maintains a registry of `Localization`s, as well any related preferences (ie. default localization).
 
 ```solidity
 interface LocalePreferences {
@@ -108,7 +108,7 @@ interface LocalePreferences {
 
 #### `set`
 
-What it's about yadda yadda
+Stores a mapping of the provided `Localization` contract. Returns `true` if retrieved successfully, `false` otherwise.
 
 ```solidity
 function set(Localization _localization) external nonpayable returns (bool)
@@ -116,7 +116,7 @@ function set(Localization _localization) external nonpayable returns (bool)
 
 #### `get`
 
-What it's about yadda yadda
+Given a code, retrieves the the mapped human-readable string based on the local preferences set in the contract.
 
 ```solidity
 function get(bytes32 _code) external view returns (bool, string)
