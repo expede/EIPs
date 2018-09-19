@@ -118,7 +118,6 @@ What it's about yadda yadda
 
 ```solidity
 function get(bytes32 _code) external view returns (bool, string)
-function get(bytes32 _code, address _who) external view returns (bool, string)
 ```
 
 ## Base String Format
@@ -170,13 +169,9 @@ Link to the main Eth status codes repo. But for now...
 
 ```solidity
 contract Localization {
-  string public missing;
-
   mapping(bytes32 => string) private dictionary_;
 
-  constructor(string _missing) public {
-    missing = _missing;
-  }
+  constructor(string _missing) public {}
 
   // Currently overwrites anything
   function set(bytes32 _code, string _message) external nonpayable {
@@ -185,11 +180,7 @@ contract Localization {
   }
 
   function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
-    if (dictionary_[_code] == "") {
-      return missing;
-    } else {
-      return dictionary_[_code];
-    }
+    return ((dictionary_[_code] != ""), dictionary_[_code]);
   }
 }
 
@@ -207,6 +198,11 @@ contract LocalePreferences {
     return true;
   }
 
+  // The multiple return here adds a small amount of downstream complexity
+  // Do we even care about showing the consumer that their translation wasn't found?
+  // Better handled as an event, possibly? (ie: for the devs)
+  //
+  // Have to think about this some more
   function get(bytes32 _code) external view returns (bool, string) {
     return get(_code, _tx.origin);
   }
