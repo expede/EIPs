@@ -36,7 +36,7 @@ By enabling users to register their own translations, we empower them to provide
 
 * Abstracted out of ERC1066
 
-The concept of status translations was originally proposed as part of ERC1066. We feel it should be its own standard, such that it can
+The concept of status translations was originally proposed as part of ERC1066. We feel it should be its own standard, as it may be applicable to a larger set of problems.
 
 
 ## Specification
