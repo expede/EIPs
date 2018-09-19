@@ -83,7 +83,7 @@ function set(bytes32 _code, string _message) external nonpayable {
 What it's about yadda yadda
 
 ```solidity
-function stringFor(bytes32 _code) external nonpayable returns (bool _wasFound, string _message) {
+function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
 ```
 
 ## Interface
@@ -91,7 +91,7 @@ function stringFor(bytes32 _code) external nonpayable returns (bool _wasFound, s
 ```solidity
 interface Localization {
   function set(bytes32 _code, string _message) external nonpayable
-  function stringFor(bytes32 _code) external nonpayable returns (bool _wasFound, string _message)
+  function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message)
 }
 ```
 
@@ -110,8 +110,8 @@ function set(Localization _localization) external nonpayable returns (bool)
 What it's about yadda yadda
 
 ```solidity
-function get(bytes32 _code) external nonpayable returns (bool, string)
-function get(bytes32 _code, address _who) external nonpayable returns (bool, string)
+function get(bytes32 _code) external view returns (bool, string)
+function get(bytes32 _code, address _who) external view returns (bool, string)
 ```
 
 ### Interface
@@ -119,10 +119,10 @@ function get(bytes32 _code, address _who) external nonpayable returns (bool, str
 ```solidity
 interface LocalePreferences {
   function set(Localization _localization) external nonpayable returns (bool)
-  function get(bytes32 _code) external nonpayable returns (bool, string)
+  function get(bytes32 _code) external view returns (bool, string)
 
   // Maybe
-  function get(bytes32 _code, address _who) external nonpayable returns (bool, string)
+  function get(bytes32 _code, address _who) external view returns (bool, string)
 }
 ```
 
@@ -189,7 +189,7 @@ contract Localization {
     return true;
   }
 
-  function stringFor(bytes32 _code) external nonpayable returns (bool _wasFound, string _message) {
+  function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
     if (dictionary_[_code] == "") {
       return missing;
     } else {
@@ -212,15 +212,15 @@ contract LocalePreferences {
     return true;
   }
 
-  function get(bytes32 _code) external nonpayable returns (bool, string) {
+  function get(bytes32 _code) external view returns (bool, string) {
     return get(_code, _tx.origin);
   }
 
-  function get(bytes32 _code, address _who) external nonpayable returns (bool, string) {
+  function get(bytes32 _code, address _who) external view returns (bool, string) {
     return getLocale(_who).stringFor(_code);
   }
 
-  function getLocaleFor(address _who) internal returns (Localization) {
+  function getLocaleFor(address _who) internal view returns (Localization) {
     if (registry_[_who_] == Localization(0)) {
       return getDefault();
     } else {
