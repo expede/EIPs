@@ -130,7 +130,7 @@ The base string format will be UTF-8, as it's compatible with all means of strin
 
 It can be very useful to insert use-case-specific data into a string.
 
-A user may want a high level message without detailed information. In order to achieve this, than can omit the argument in the template, and it'll be ignored.
+A user may want a high level message without detailed information. In order to achieve this, they can omit the argument in the template, and it'll be ignored.
 Other users will still receive the argument data.
 
 The returned strings may either be simple strings, or contain the following:
