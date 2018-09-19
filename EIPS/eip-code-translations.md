@@ -120,9 +120,6 @@ function get(bytes32 _code, address _who) external view returns (bool, string)
 interface LocalePreferences {
   function set(Localization _localization) external nonpayable returns (bool)
   function get(bytes32 _code) external view returns (bool, string)
-
-  // Maybe
-  function get(bytes32 _code, address _who) external view returns (bool, string)
 }
 ```
 
@@ -216,6 +213,7 @@ contract LocalePreferences {
     return get(_code, _tx.origin);
   }
 
+  // Primarily for testing
   function get(bytes32 _code, address _who) external view returns (bool, string) {
     return getLocale(_who).stringFor(_code);
   }
