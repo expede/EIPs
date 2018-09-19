@@ -32,7 +32,13 @@ By allowing users to register their own translations, we provide tools to enable
 <!--The motivation is critical for EIPs that want to change the Ethereum protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the EIP solves. EIP submissions without sufficient motivation may be rejected outright.-->
 
 * User feedback is abysmal
-* Want this to be a truly global system.
+
+The current state of user feedback involves either reverting with a message (often in English), or returning a boolean pass/fail status, neither of which provide the capacity to communicate with end users who are linguistically or culturally diverse.
+
+* A truly global system
+
+
+
 * Abstracted out of ERC1066, but can also be slightly more general
 
 ## Specification
