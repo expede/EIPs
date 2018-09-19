@@ -97,7 +97,7 @@ function stringFor(bytes32 _code) external view returns (bool _wasFound, string 
 
 ### `LocalePreferences`
 
-A `LocalPreferences` contract maintains a registry of `Localization`s, as well any related preferences (ie. default localization).
+A `LocalePreferences` contract maintains a registry of `Localization`s, as well any related preferences (ie. default localization).
 
 ```solidity
 interface LocalePreferences {
