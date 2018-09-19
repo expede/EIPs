@@ -19,7 +19,7 @@ This standard provides a standard interface for fetching a string description of
 
 There are many cases where an end user needs feedback on, or instruction from, a smart contact. Returning a hard-coded string in some language (typically English) only serves a small segment of the global population.
 
-By allowing users to register their own translations, we provide tools to enable richer messaging that is more culturally accurate, at varying levels of technical detail.
+By allowing users to register their own translations, we enable richer messaging that is more culturally and linguistically accurate.
 
 ## Motivation
 <!--The motivation is critical for EIPs that want to change the Ethereum protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the EIP solves. EIP submissions without sufficient motivation may be rejected outright.-->
@@ -34,7 +34,7 @@ By enabling users to register their own translations, we empower them to provide
 
 ### Abstracted out of ERC1066
 
-The concept of status translations was originally proposed as part of ERC1066. We feel it should be its own standard as it feels like somewhat discrete problem set, and is potentially applicable in other circumstances outside of ERC1066.
+The concept of status translations was originally proposed as part of ERC1066. We feel it should be its own standard as it is potentially applicable in other circumstances outside of ERC1066.
 
 
 ## Specification
@@ -89,7 +89,7 @@ function set(bytes32 _code, string _message) external nonpayable {
 
 #### `stringFor`
 
-Get the human-readable string for any given code. Returns the `bool` retrieval status, as well as the message itself, if found, otherwise an empty string.
+Get the human-readable string for any given code. Returns a `bool` retrieval status, as well as the message itself, if found, otherwise an empty string.
 
 ```solidity
 function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
@@ -116,7 +116,7 @@ function set(Localization _localization) external nonpayable returns (bool)
 
 #### `get`
 
-Given a code, retrieves the the mapped human-readable string based on the local preferences set in the contract.
+Given a code, retrieves a success status, and mapped human-readable string based on the local preferences set in the contract, or in the event of a missing code, false and an empty string.
 
 ```solidity
 function get(bytes32 _code) external view returns (bool, string)
@@ -128,13 +128,12 @@ The base string format will be UTF-8, as it's compatible with all means of strin
 
 ### Format Strings
 
-It can be very useful to insert use-case-specific data in a string.
+It can be very useful to insert use-case-specific data into a string.
 
-A user may want a high level message without detailed information.
-They then just don't include the argument in the template, and it'll be ignored.
-Other users will still get the data inserted.
+A user may want a high level message without detailed information. In order to achieve this, than can omit the argument in the template, and it'll be ignored.
+Other users will still receive the argument data.
 
-The returned strings may either be simple strings, or contain
+The returned strings may either be simple strings, or contain the following:
 
 * String concatenation and interpolation on chain is notoriously expensive and inefficient
 * Return a common format (probably IEEE Std 1003.1 / printf)
