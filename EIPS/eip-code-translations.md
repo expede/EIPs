@@ -31,15 +31,18 @@ By allowing users to register their own translations, we provide tools to enable
 ## Motivation
 <!--The motivation is critical for EIPs that want to change the Ethereum protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the EIP solves. EIP submissions without sufficient motivation may be rejected outright.-->
 
-* User feedback is abysmal
+* User Feedback
 
-The current state of user feedback involves either reverting with a message (often in English), or returning a boolean pass/fail status, neither of which provide the capacity to communicate with end users who are linguistically or culturally diverse.
+The current state of user feedback involves either reverting "with reason" (often in English), or returning a boolean pass/fail status, neither of which provide much capacity to communicate with a diverse end-user base.
 
-* A truly global system
+* A Truly Global System
 
+By enabling users to register their own translations, we empower them to provide culturally and linguistically suitable messaging, leading to broader and more distributed access to information.
 
+* Abstracted out of ERC1066
 
-* Abstracted out of ERC1066, but can also be slightly more general
+The concept of status translations was originally proposed as part of ERC1066. We feel it should be its own standard, such that it can
+
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum platforms (go-ethereum, parity, cpp-ethereum, ethereumj, ethereumjs, and [others](https://github.com/ethereum/wiki/wiki/Clients)).-->
