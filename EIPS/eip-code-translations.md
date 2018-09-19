@@ -79,7 +79,7 @@ interface Localization {
 
 ### `set`
 
-What it's about yadda yadda
+Set a human-readable message for any given EIP-1066 status code.
 
 ```solidity
 function set(bytes32 _code, string _message) external nonpayable {
@@ -87,7 +87,7 @@ function set(bytes32 _code, string _message) external nonpayable {
 
 ### `stringFor`
 
-What it's about yadda yadda
+Retrieve the human-readable message for any given EIP-1066 status code.
 
 ```solidity
 function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
