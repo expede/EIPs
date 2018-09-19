@@ -68,25 +68,7 @@ The `LocalePreferences` contract functions as a proxy for `tx.origin`.
 
 ## `Localization`
 
-### Methods
-
-#### `set`
-
-What it's about yadda yadda
-
-```solidity
-function set(bytes32 _code, string _message) external nonpayable {
-```
-
-#### `stringFor`
-
-What it's about yadda yadda
-
-```solidity
-function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
-```
-
-## Interface
+Top-level discussion here
 
 ```solidity
 interface Localization {
@@ -95,7 +77,32 @@ interface Localization {
 }
 ```
 
+### `set`
+
+What it's about yadda yadda
+
+```solidity
+function set(bytes32 _code, string _message) external nonpayable {
+```
+
+### `stringFor`
+
+What it's about yadda yadda
+
+```solidity
+function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
+```
+
 ## `LocalePreferences`
+
+Top level discussion here
+
+```solidity
+interface LocalePreferences {
+  function set(Localization _localization) external nonpayable returns (bool)
+  function get(bytes32 _code) external view returns (bool, string)
+}
+```
 
 ### `set`
 
@@ -112,15 +119,6 @@ What it's about yadda yadda
 ```solidity
 function get(bytes32 _code) external view returns (bool, string)
 function get(bytes32 _code, address _who) external view returns (bool, string)
-```
-
-### Interface
-
-```solidity
-interface LocalePreferences {
-  function set(Localization _localization) external nonpayable returns (bool)
-  function get(bytes32 _code) external view returns (bool, string)
-}
 ```
 
 ## Base String Format
