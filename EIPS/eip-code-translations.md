@@ -45,25 +45,25 @@ Two types of contract: a `LocalePreferences`, and `Localization`s.
 The `LocalePreferences` contract functions as a proxy for `tx.origin`.
 
 ```diagram
-                                                              +--------------+
-                                                              |              |
-                                                        +---> | Localization |
-                                                        |     |              |
-                                                        |     +--------------+
+                                                                 +--------------+
+                                                                 |              |
+                                                        +------> | Localization |
+                                                        |        |              |
+                                                        |        +--------------+
                                                         |
                                                         |
-+-----------+              +-------------------+        |     +--------------+
-|           |              |                   | <------+     |              |
-| Requestor | <----------> | LocalePreferences | <----------> | Localization |
-|           |              |                   | <------+     |              |
-+-----------+              +-------------------+        |     +--------------+
++-----------+              +-------------------+        |        +--------------+
+|           |              |                   | <------+        |              |
+| Requestor | <----------> | LocalePreferences | <-------------> | Localization |
+|           |              |                   | <------+        |              |
++-----------+              +-------------------+        |        +--------------+
                                                         |
                                                         |
-                                                        |     +--------------+
-                                                        |     |              |
-                                                        +---> | Localization |
-                                                              |              |
-                                                              +--------------+
+                                                        |        +--------------+
+                                                        |        |              |
+                                                        +------> | Localization |
+                                                                 |              |
+                                                                 +--------------+
 ```
 
 ## `Localization`
