@@ -26,13 +26,13 @@ This standard provides a standard interface for fetching a string description of
 
 There are many cases where an end user needs feedback on, or instruction from, a smart contact. Returning a hard-coded string in some language (typically English) only serves a small segment of the global population.
 
-By allowing users to register their own translations .............
+By allowing users to register their own translations, we provide tools to enable richer messaging that is more culturally accurate, at varying levels of technical detail.
 
 ## Motivation
 <!--The motivation is critical for EIPs that want to change the Ethereum protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the EIP solves. EIP submissions without sufficient motivation may be rejected outright.-->
 
 * User feedback is abysmal
-* Want this to be a truly global system
+* Want this to be a truly global system.
 * Abstracted out of ERC1066, but can also be slightly more general
 
 ## Specification
