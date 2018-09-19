@@ -124,12 +124,11 @@ function get(bytes32 _code) external view returns (bool, string)
 
 ### Base String Format
 
-* UTF8
-* Super compatible with everything, all the languages, emoji, &c
+The base string format will be UTF-8, as it's compatible with all means of strings including all languages, emojis and special characters.
 
 ### Format Strings
 
-It can be very useful to insert use-case-specific data in a string
+It can be very useful to insert use-case-specific data in a string.
 
 A user may want a high level message without detailed information.
 They then just don't include the argument in the template, and it'll be ignored.
