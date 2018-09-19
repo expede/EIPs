@@ -10,8 +10,6 @@ created: 2018-09-15
 requires: 1066 [...maybe]
 ---
 
-The title should be 44 characters or less.
-
 ## Simple Summary
 An on-chain system for registering and converting machine-efficient codes into
 human-readable strings in arbitrary languages.
@@ -26,25 +24,25 @@ By allowing users to register their own translations, we provide tools to enable
 ## Motivation
 <!--The motivation is critical for EIPs that want to change the Ethereum protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the EIP solves. EIP submissions without sufficient motivation may be rejected outright.-->
 
-* User Feedback
+### User Feedback
 
 The current state of user feedback involves either reverting "with reason" (often in English), or returning a boolean pass/fail status, neither of which provide much capacity to communicate with a diverse end-user base.
 
-* A Truly Global System
+### A Truly Global System
 
 By enabling users to register their own translations, we empower them to provide culturally and linguistically suitable messaging, leading to broader and more distributed access to information.
 
-* Abstracted out of ERC1066
+### Abstracted out of ERC1066
 
-The concept of status translations was originally proposed as part of ERC1066. We feel it should be its own standard, as it may be applicable to a larger set of problems.
+The concept of status translations was originally proposed as part of ERC1066. We feel it should be its own standard as it feels like somewhat discrete problem set, and is potentially applicable in other circumstances outside of ERC1066.
 
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum platforms (go-ethereum, parity, cpp-ethereum, ethereumj, ethereumjs, and [others](https://github.com/ethereum/wiki/wiki/Clients)).-->
 
-## Contract Architecture
+### Contract Architecture
 
-Two types of contract: a `LocalePreferences`, and `Localization`s.
+This standard includes two types of contract:  `LocalePreferences`, and `Localization`.
 
 The `LocalePreferences` contract functions as a proxy for `tx.origin`.
 
@@ -70,7 +68,7 @@ The `LocalePreferences` contract functions as a proxy for `tx.origin`.
                                                                  +--------------+
 ```
 
-## `Localization`
+### `Localization`
 
 Top-level discussion here
 
@@ -81,7 +79,7 @@ interface Localization {
 }
 ```
 
-### `set`
+#### `set`
 
 Set a human-readable message for any given ERC1066 status code.
 
@@ -89,7 +87,7 @@ Set a human-readable message for any given ERC1066 status code.
 function set(bytes32 _code, string _message) external nonpayable {
 ```
 
-### `stringFor`
+#### `stringFor`
 
 Retrieve the human-readable message for any given ERC1066 status code.
 
@@ -97,7 +95,7 @@ Retrieve the human-readable message for any given ERC1066 status code.
 function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
 ```
 
-## `LocalePreferences`
+### `LocalePreferences`
 
 Top level discussion here
 
@@ -108,7 +106,7 @@ interface LocalePreferences {
 }
 ```
 
-### `set`
+#### `set`
 
 What it's about yadda yadda
 
@@ -116,7 +114,7 @@ What it's about yadda yadda
 function set(Localization _localization) external nonpayable returns (bool)
 ```
 
-### `get`
+#### `get`
 
 What it's about yadda yadda
 
@@ -124,12 +122,12 @@ What it's about yadda yadda
 function get(bytes32 _code) external view returns (bool, string)
 ```
 
-## Base String Format
+### Base String Format
 
 * UTF8
 * Super compatible with everything, all the languages, emoji, &c
 
-## Format Strings
+### Format Strings
 
 It can be very useful to insert use-case-specific data in a string
 
