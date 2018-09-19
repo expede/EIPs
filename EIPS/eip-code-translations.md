@@ -128,18 +128,14 @@ The base string format will be UTF-8, as it's compatible with all means of strin
 
 ### Format Strings
 
-It can be very useful to insert use-case-specific data into a string.
+It can be useful to insert use-case-specific data into a string. We propose using IEEE Std 1003.1 / `printf` common format for including data.
 
 A user may want a high level message without detailed information. In order to achieve this, they can omit the argument in the template, and it'll be ignored.
 Other users will still receive the argument data.
 
-The returned strings may either be simple strings, or contain the following:
+The returned strings may either be simple strings, or contain argument data.
 
-* String concatenation and interpolation on chain is notoriously expensive and inefficient
-* Return a common format (probably IEEE Std 1003.1 / printf)
-  * http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html
-  * Downside is that we're passing around type info. Useful when in JSON, &c
-    * but not strictly needed? Maybe?
+Examples with arguments:
 
 ```solidity
 "%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
