@@ -30,7 +30,7 @@ The current state of user feedback involves either reverting "with reason" (ofte
 
 ### A Truly Global System
 
-By enabling users to register their own translations, we empower them to provide culturally and linguistically suitable messaging, leading to broader and more distributed access to information.
+By enabling developers to provide translations, we empower them to supply culturally and linguistically suitable messaging, leading to broader and more distributed access to information.
 
 ### Abstracted out of ERC1066
 
@@ -171,7 +171,7 @@ The code to human-readable string mappings that this standard enables are orthog
 
 ### Boolean Return Values
 
-Setting or retrieving a human-readable string returns with it a boolean value. This is to represent success or failure when looking for a code, and is meant to be used as an alternative to checking if the string is empty. This is also useful as a fallback. In the event that a code has not been mapped for the localization in use, the default localization could be applied instead with more ease.
+Setting or retrieving a human-readable string returns with it a boolean value. This is to represent success or failure when looking for a code, and is meant to be used as an alternative to checking if the string is empty. This is also useful as a fallback. In the event that a code has not been mapped for the localization in use, the default localization can be applied instead with more ease.
 
 ## Implementation
 <!--The implementations must be completed before any EIP is given status "Final", but it need not be completed before the EIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
