@@ -88,7 +88,7 @@ interface Localization {
 
 ### `set`
 
-Set a human-readable message for any given EIP-1066 status code.
+Set a human-readable message for any given ERC1066 status code.
 
 ```solidity
 function set(bytes32 _code, string _message) external nonpayable {
@@ -96,7 +96,7 @@ function set(bytes32 _code, string _message) external nonpayable {
 
 ### `stringFor`
 
-Retrieve the human-readable message for any given EIP-1066 status code.
+Retrieve the human-readable message for any given ERC1066 status code.
 
 ```solidity
 function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
