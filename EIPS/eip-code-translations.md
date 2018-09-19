@@ -157,10 +157,21 @@ The returned strings may either be simple strings, or contain the following:
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
 
-* Why `bytes32` keys?
-* Should not be locked into a specific UI
-* Should be compatible with `revert`
-* Return a bool, because it *is* just a boolean (found or not)
+### `bytes32` Keys
+
+While ERC1066 codes are stored as a `byte`, in order to provide maximal flexibility to the user, codes in this standard are `bytes32`.
+
+### UI Independent
+
+Localization logic should be UI independent in order to maintain consistency across many different interfaces.
+
+### Compatible with `revert`
+
+The code to human-readable string mappings that this standard enables are orthogonal to revert and are not meant be used as a replacement, but instead as a potential compliment to "revert with reason".
+
+### Boolean Return Values
+
+Setting or retrieving a human-readable string returns with it a boolean value. This is to represent success or failure when looking for a code, and is meant to be used as an alternative to checking if the string is empty. This is also useful as a fallback. In the event that a code has not been mapped for the localization in use, the default localization could be applied instead with more ease.
 
 ## Implementation
 <!--The implementations must be completed before any EIP is given status "Final", but it need not be completed before the EIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
