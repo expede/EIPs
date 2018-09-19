@@ -161,10 +161,6 @@ While ERC1066 codes are stored as a `byte`, in order to provide maximal flexibil
 
 Localization logic should be UI independent in order to maintain consistency across many different interfaces.
 
-### Compatible with `revert`
-
-The code to human-readable string mappings that this standard enables are orthogonal to revert and are not meant be used as a replacement, but instead as a potential compliment to "revert with reason".
-
 ### Boolean Return Values
 
 Setting or retrieving a human-readable string returns with it a boolean value. This is to represent success or failure when looking for a code, and is meant to be used as an alternative to checking if the string is empty. This is also useful as a fallback. In the event that a code has not been mapped for the localization in use, the default localization can be applied instead with more ease.
