@@ -124,14 +124,43 @@ cases, where there is a desire to explain why the fallback localization was used
 function get(bytes32 _code) external view returns (bool _wasFound, string _text)
 ```
 
-## Base String Format
+## String Format
 
-Strings are
+All strings MUST be encoded as UTF-8.
+
+```solidity
+"I want to make a joke about Sodium, but... Na."
+"Words with špeĉiäl chârãçtérs"
+"アルミ缶の上にあるみかん。"
+```
+
+Template strings are allowed, and MUST follow C's `printf` conventions.
+
+Please not that it is highly advisable to return the template string _as is_,
+with arguments as multiple return values, leaving the actual interpolation
+to be done off chain.
+
+```solidity
+"%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
+```
+
+```solidity
+("%1s is an element with the atomic number %2d!", atomName, atomicNumber)
+
+// For example
+("%1s is an element with the atomic number %2d!", "Mercury", 80);
+// => "Mercury is an element with the atomic number 80!"
+```
+
+## Rationale
+
+* Why `bytes32` keys?
+* Should not be locked into a specific UI
+* Should be compatible with `revert`
+* Return a bool, because it *is* just a boolean (found or not)
 
 * UTF8 / UTF-16?!??!?!
 * Super compatible with everything, all the languages, emoji, &c
-
-## Format Strings
 
 It can be very useful to insert use-case-specific data in a string
 
@@ -147,26 +176,6 @@ The returned strings may either be simple strings, or contain
   * Downside is that we're passing around type info. Useful when in JSON, &c
     * but not strictly needed? Maybe?
 
-```solidity
-"%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
-```
-
-```solidity
-("%1s is an element with the atomic number %2d!", atomName, atomicNumber)
-
-// For example
-("%1s is an element with the atomic number %2d!", "Mercury", 80);
-// => "Mercury is an element with the atomic number 80!"
-```
-
-
-## Rationale
-<!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
-
-* Why `bytes32` keys?
-* Should not be locked into a specific UI
-* Should be compatible with `revert`
-* Return a bool, because it *is* just a boolean (found or not)
 
 ## Implementation
 <!--The implementations must be completed before any EIP is given status "Final", but it need not be completed before the EIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
