@@ -1,6 +1,6 @@
 ---
 eip: <to be assigned>
-title: Localizable Signal-to-Text
+title: Localized Signal-to-Text
 author: Brooklyn Zelenka (@expede), Jennifer Cooper (@jenncoop)
 discussions-to: <URL>
 status: Draft
@@ -91,11 +91,11 @@ function textFor(bytes32 _code) external view returns (bool _wasFound, string _t
 
 ## `LocalizationPreference`
 
-A registry plus proxy contract that allows users to set their preferred `Localization`,
-and fetches text ___.
+A proxy contract that allows users to set their preferred `Localization`.
+Text lookup is then passed on to their preferred contract.
 
 A fallback `Localization` MUST be provided, and routed to if the requester has
-not registered a preference.
+not explicitly set a preferred `Localization`.
 
 ```solidity
 interface LocalePreferences {
@@ -106,7 +106,7 @@ interface LocalePreferences {
 
 ### `set`
 
-What it's about yadda yadda
+Sets a user's preferred `Localization`. The registering user SHOULD be considered `tx.origin`.
 
 ```solidity
 function set(Localization _localization) external nonpayable returns (bool)
@@ -114,10 +114,14 @@ function set(Localization _localization) external nonpayable returns (bool)
 
 ### `get`
 
-What it's about yadda yadda
+Retrieve text for a code found at the user's preferred `Localization` contract.
+
+The first return value (`bool _wasFound`) represents if the text was available at
+that contract, or if a fallback was used. This information is useful for some UI
+cases, where there is a desire to explain why the fallback localization was used.
 
 ```solidity
-function get(bytes32 _code) external view returns (bool, string)
+function get(bytes32 _code) external view returns (bool _wasFound, string _text)
 ```
 
 ## Base String Format
