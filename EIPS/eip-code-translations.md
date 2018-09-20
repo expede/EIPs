@@ -150,12 +150,15 @@ The base string format will be UTF-8, as it's compatible with all means of strin
 "Emoji are legal: 🙈🙉🙊🎉"
 "Feel free to be creative: (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧"
 ```
+### Templates
 
 Template strings are allowed, and MUST follow the [C `printf`](http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html) conventions.
 
 ```c
 "Knock knock. Who's there? %1s. %1s who? %2s!"
 ```
+
+#### Interpolation Strategy
 
 Please not that it is highly advisable to return the template string _as is_,
 with arguments as multiple return values, leaving the actual interpolation
