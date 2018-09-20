@@ -22,7 +22,7 @@ This standard provides a standard interface for fetching a string description of
 
 There are many cases where an end user needs feedback on, or instruction from, a smart contact. Returning a hard-coded string in some language (typically English) only serves a small segment of the global population.
 
-By allowing users to register their own translations .............
+By allowing users to register their own translations, we enable richer messaging that is more culturally and linguistically accurate.
 
 We also set the template string encoding to the widely used IEEE Std 1003.1.
 
@@ -41,9 +41,21 @@ The developer experience is enhanced by returning easier to consume information
 with more context. End user experience is enhanced by providing text that can be
 propagated up to the UI.
 
+### User Feedback
+
+The current state of user feedback involves either reverting "with reason" (often in English), or returning a boolean pass/fail status, neither of which provide much capacity to communicate with a diverse end-user base.
+
+### A Truly Global System
+
+By enabling developers to provide translations, we empower them to supply culturally and linguistically suitable messaging, leading to broader and more distributed access to information.
+
+### Abstracted out of ERC1066
+
+The concept of status translations was originally proposed as part of ERC1066. We feel it should be its own standard as it is potentially applicable in other circumstances outside of ERC1066.
+
 ## Specification
 
-## Contract Architecture
+### Contract Architecture
 
 Two types of contract: a `LocalePreference`, and `Localization`s.
 
@@ -71,7 +83,7 @@ The `LocalePreferences` contract functions as a proxy for `tx.origin`.
                                                                  +--------------+
 ```
 
-## `Localization`
+### `Localization`
 
 A contract that holds a simple mapping of codes to their text representations.
 
@@ -104,7 +116,7 @@ interface LocalePreferences {
 }
 ```
 
-### `set`
+#### `set`
 
 Sets a user's preferred `Localization`. The registering user SHOULD be considered `tx.origin`.
 
@@ -112,13 +124,15 @@ Sets a user's preferred `Localization`. The registering user SHOULD be considere
 function set(Localization _localization) external nonpayable returns (bool)
 ```
 
-### `get`
+#### `get`
 
 Retrieve text for a code found at the user's preferred `Localization` contract.
 
 The first return value (`bool _wasFound`) represents if the text was available at
 that contract, or if a fallback was used. This information is useful for some UI
 cases, where there is a desire to explain why the fallback localization was used.
+
+Given a code, retrieves a success status, and mapped human-readable string based on the local preferences set in the contract, or in the event of a missing code, false and an empty string.
 
 ```solidity
 function get(bytes32 _code) external view returns (bool _wasFound, string _text)
@@ -127,6 +141,8 @@ function get(bytes32 _code) external view returns (bool _wasFound, string _text)
 ## String Format
 
 All strings MUST be encoded as UTF-8.
+
+The base string format will be UTF-8, as it's compatible with all means of strings including all languages, emojis and special characters.
 
 ```solidity
 "Špeĉiäl chârãçtérs are permitted"
@@ -153,10 +169,17 @@ to be done off chain.
 
 ## Rationale
 
-* Why `bytes32` keys?
-* Should not be locked into a specific UI
-* Should be compatible with `revert`
-* Return a bool, because it *is* just a boolean (found or not)
+### `bytes32` Keys
+
+While ERC1066 codes are stored as a `byte`, in order to provide maximal flexibility to the user, codes in this standard are `bytes32`.
+
+### UI Independent
+
+Localization logic should be UI independent in order to maintain consistency across many different interfaces.
+
+### Boolean Return Values
+
+Setting or retrieving a human-readable string returns with it a boolean value. This is to represent success or failure when looking for a code, and is meant to be used as an alternative to checking if the string is empty. This is also useful as a fallback. In the event that a code has not been mapped for the localization in use, the default localization can be applied instead with more ease.
 
 * UTF8 / UTF-16?!??!?!
 * Super compatible with everything, all the languages, emoji, &c
