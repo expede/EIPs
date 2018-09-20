@@ -1,7 +1,7 @@
 ---
 eip: <to be assigned>
-title: Human Facing Signal-to-Text
-author: Brooklyn Zelenka (@expede), Jennifer Cooper (@jncoops)
+title: Localizable Signal-to-Text
+author: Brooklyn Zelenka (@expede), Jennifer Cooper (@jenncoop)
 discussions-to: <URL>
 status: Draft
 type: Standards Track
@@ -31,12 +31,15 @@ If Ethereum is to be a truly global system usable by experts and lay persons ali
 systems to provide feedback on what happened during a transaction are needed in
 as many languages as possible.
 
-* User feedback is abysmal
-* Want this to be a truly global system
-* Abstracted out of ERC1066, but can also be slightly more general
+There are several systems on Ethereum that are machine efficient ways of
+representing intent, status, state transition, or other semantic signals
+including enums or ERC-1066 codes.
+
+The developer experience is enhanced by returning easier to consume information
+with more context. End user experience is enhanced by providing text that can be
+inserted into the UI.
 
 ## Specification
-<!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum platforms (go-ethereum, parity, cpp-ethereum, ethereumj, ethereumjs, and [others](https://github.com/ethereum/wiki/wiki/Clients)).-->
 
 ## Contract Architecture
 
