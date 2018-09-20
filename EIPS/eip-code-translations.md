@@ -147,6 +147,7 @@ The base string format will be UTF-8, as it's compatible with all means of strin
 ```solidity
 "Špeĉiäl chârãçtérs are permitted"
 "As are non-Latin characters: アルミ缶の上にあるみかん。"
+"Feel free to be creative: ZA̡͊͠͝LGΌ ISͮ̂҉̯͈͕̹̘̱ TO͇̹̺ͅƝ̴ȳ̳ TH̘Ë͖́̉ ͠P̯͍̭O̚​N̐Y̡ H̸̡̪̯ͨ͊̽̅̾̎Ȩ̬̩̾͛ͪ̈́̀́͘ ̶̧̨̱̹̭̯ͧ̾ͬC̷̙̲̝͖ͭ̏ͥͮ͟Oͮ͏̮̪̝͍M̲̖͊̒ͪͩͬ̚̚͜Ȇ̴̟̟͙̞ͩ͌͝S̨̥̫͎̭ͯ̿̔̀ͅ"
 ```
 
 Template strings are allowed, and MUST follow [C's `printf`](http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html) conventions.
