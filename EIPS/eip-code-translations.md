@@ -151,7 +151,7 @@ The base string format will be UTF-8, as it's compatible with all means of strin
 "Feel free to be creative: (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧"
 ```
 
-Template strings are allowed, and MUST follow [C's `printf`](http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html) conventions.
+Template strings are allowed, and MUST follow the [C `printf`](http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html) conventions.
 
 ```solidity
 "%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
