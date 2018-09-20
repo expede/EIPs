@@ -129,8 +129,7 @@ function get(bytes32 _code) external view returns (bool _wasFound, string _text)
 All strings MUST be encoded as UTF-8.
 
 ```solidity
-"I want to make a joke about Sodium, but... Na."
-"Words with špeĉiäl chârãçtérs"
+"Text with špeĉiäl chârãçtérs is permitted"
 "アルミ缶の上にあるみかん。"
 ```
 
