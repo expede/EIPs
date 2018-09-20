@@ -1,26 +1,22 @@
 ---
 eip: <to be assigned>
-title: Human-Readable Signal Representation Archetecture
+title: Human Facing Signal-to-Text
 author: Brooklyn Zelenka (@expede), Jennifer Cooper (@jncoops)
 discussions-to: <URL>
 status: Draft
 type: Standards Track
 category: ERC
 created: 2018-09-15
-requires: 1066 [...maybe]
 ---
 
-The title should be 44 characters or less.
-
 ## Simple Summary
-If you can't explain it simply, you don't understand it well enough."
-Provide a simplified and layman-accessible explanation of the EIP.
 
-An on-chain system for registering and converting machine-efficient codes into
-human-readable strings in arbitrary languages
+An on-chain system for providing user feedback to by converting machine-efficient
+codes into human-readable strings in any language or phrasing. The system does not
+impose a list of languages, but rather lets users write, share, and use the
+localization of their choice.
 
 ## Abstract
-A short (~200 word) description of the technical issue being addressed.
 
 This standard provides a standard interface for fetching a string description of a machine signal in an arbitrary human language.
 
@@ -29,7 +25,11 @@ There are many cases where an end user needs feedback on, or instruction from, a
 By allowing users to register their own translations .............
 
 ## Motivation
-<!--The motivation is critical for EIPs that want to change the Ethereum protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the EIP solves. EIP submissions without sufficient motivation may be rejected outright.-->
+
+User feedback is a challenge for computing generally, and especially on Ethereum.
+If Ethereum is to be a truly global system usable by experts and lay persons alike,
+systems to provide feedback on what happened during a transaction are needed in
+as many languages as possible.
 
 * User feedback is abysmal
 * Want this to be a truly global system
