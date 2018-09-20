@@ -24,26 +24,28 @@ There are many cases where an end user needs feedback on, or instruction from, a
 
 By allowing users to register their own translations .............
 
+We also set the template string encoding to the widely used IEEE Std 1003.1.
+
 ## Motivation
 
-User feedback is a challenge for computing generally, and especially on Ethereum.
 If Ethereum is to be a truly global system usable by experts and lay persons alike,
 systems to provide feedback on what happened during a transaction are needed in
 as many languages as possible.
 
-There are several systems on Ethereum that are machine efficient ways of
-representing intent, status, state transition, or other semantic signals
-including enums or ERC-1066 codes.
+User feedback is a challenge in computing generally, and especially on Ethereum.
+
+There are several machine efficient ways of representing intent, status,
+state transition, and other semantic signals including enums or ERC-1066 codes.
 
 The developer experience is enhanced by returning easier to consume information
 with more context. End user experience is enhanced by providing text that can be
-inserted into the UI.
+propagated up to the UI.
 
 ## Specification
 
 ## Contract Architecture
 
-Two types of contract: a `LocalePreferences`, and `Localization`s.
+Two types of contract: a `LocalePreference`, and `Localization`s.
 
 The `LocalePreferences` contract functions as a proxy for `tx.origin`.
 
@@ -71,39 +73,34 @@ The `LocalePreferences` contract functions as a proxy for `tx.origin`.
 
 ## `Localization`
 
-Top-level discussion here
+A contract that holds a simple mapping of codes to their text representations.
 
 ```solidity
 interface Localization {
-  function set(bytes32 _code, string _message) external nonpayable
-  function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message)
+  function textFor(bytes32 _code) external view returns (bool _wasFound, string _text)
 }
 ```
 
-### `set`
+### `textFor`
 
-What it's about yadda yadda
-
-```solidity
-function set(bytes32 _code, string _message) external nonpayable {
-```
-
-### `stringFor`
-
-What it's about yadda yadda
+Fetches the localized text representation.
 
 ```solidity
-function stringFor(bytes32 _code) external view returns (bool _wasFound, string _message) {
+function textFor(bytes32 _code) external view returns (bool _wasFound, string _text) {
 ```
 
-## `LocalePreferences`
+## `LocalizationPreference`
 
-Top level discussion here
+A registry plus proxy contract that allows users to set their preferred `Localization`,
+and fetches text ___.
+
+A fallback `Localization` MUST be provided, and routed to if the requester has
+not registered a preference.
 
 ```solidity
 interface LocalePreferences {
   function set(Localization _localization) external nonpayable returns (bool)
-  function get(bytes32 _code) external view returns (bool, string)
+  function textFor(bytes32 _code) external view returns (bool _wasFound_, string _text)
 }
 ```
 
@@ -125,7 +122,9 @@ function get(bytes32 _code) external view returns (bool, string)
 
 ## Base String Format
 
-* UTF8
+Strings are
+
+* UTF8 / UTF-16?!??!?!
 * Super compatible with everything, all the languages, emoji, &c
 
 ## Format Strings
@@ -187,7 +186,7 @@ contract Localization {
   }
 }
 
-contract LocalePreferences {
+contract LocalePreference {
   mapping(address => address) private registry_;
   address public defaultLocale;
 
