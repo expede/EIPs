@@ -148,7 +148,7 @@ The base string format will be UTF-8, as it's compatible with all means of strin
 "Špeĉiäl chârãçtérs are permitted"
 "As are non-Latin characters: アルミ缶の上にあるみかん。"
 "Emoji are legal: 🙈🙉🙊🎉"
-"Feel free to bve creative: (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧"
+"Feel free to be creative: (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧"
 ```
 
 Template strings are allowed, and MUST follow [C's `printf`](http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html) conventions.
