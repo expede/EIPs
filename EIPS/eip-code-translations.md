@@ -129,8 +129,8 @@ function get(bytes32 _code) external view returns (bool _wasFound, string _text)
 All strings MUST be encoded as UTF-8.
 
 ```solidity
-"Text with špeĉiäl chârãçtérs is permitted"
-"アルミ缶の上にあるみかん。"
+"Špeĉiäl chârãçtérs are permitted"
+"As are non-Latin characters: アルミ缶の上にあるみかん。"
 ```
 
 Template strings are allowed, and MUST follow C's `printf` conventions.
