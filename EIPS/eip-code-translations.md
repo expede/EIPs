@@ -153,7 +153,7 @@ The base string format will be UTF-8, as it's compatible with all means of strin
 
 Template strings are allowed, and MUST follow the [C `printf`](http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html) conventions.
 
-```solidity
+```c
 "Knock knock. Who's there? %1s. %1s who? %2s!"
 ```
 
