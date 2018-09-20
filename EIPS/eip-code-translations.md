@@ -133,7 +133,7 @@ All strings MUST be encoded as UTF-8.
 "As are non-Latin characters: アルミ缶の上にあるみかん。"
 ```
 
-Template strings are allowed, and MUST follow C's `printf` conventions.
+Template strings are allowed, and MUST follow [C's `printf`](http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html) conventions.
 
 ```solidity
 "%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
@@ -171,7 +171,7 @@ The returned strings may either be simple strings, or contain
 
 * String concatenation and interpolation on chain is notoriously expensive and inefficient
 * Return a common format (probably IEEE Std 1003.1 / printf)
-  * http://pubs.opengroup.org/onlinepubs/009696799/utilities/printf.html
+  *
   * Downside is that we're passing around type info. Useful when in JSON, &c
     * but not strictly needed? Maybe?
 
