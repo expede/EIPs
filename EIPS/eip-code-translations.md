@@ -161,7 +161,7 @@ Please not that it is highly advisable to return the template string _as is_,
 with arguments as multiple return values, leaving the actual interpolation
 to be done off chain.
 
-```solidity
+```c
 ("%1s is an element with the atomic number %2d!", atomName, atomicNumber)
 
 // For example
