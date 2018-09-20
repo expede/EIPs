@@ -135,13 +135,13 @@ All strings MUST be encoded as UTF-8.
 
 Template strings are allowed, and MUST follow C's `printf` conventions.
 
-Please not that it is highly advisable to return the template string _as is_,
-with arguments as multiple return values, leaving the actual interpolation
-to be done off chain.
-
 ```solidity
 "%1d bottles of beer on the wall, %1d bottles of beer. Take one down, pass it around, %2d bottles of beer on the wall"
 ```
+
+Please not that it is highly advisable to return the template string _as is_,
+with arguments as multiple return values, leaving the actual interpolation
+to be done off chain.
 
 ```solidity
 ("%1s is an element with the atomic number %2d!", atomName, atomicNumber)
