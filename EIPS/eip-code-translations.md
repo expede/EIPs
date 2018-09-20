@@ -142,8 +142,6 @@ function get(bytes32 _code) external view returns (bool _wasFound, string _text)
 
 All strings MUST be encoded as UTF-8.
 
-The base string format will be UTF-8, as it's compatible with all means of strings including all languages, emojis and special characters.
-
 ```solidity
 "Špeĉiäl chârãçtérs are permitted"
 "As are non-Latin characters: アルミ缶の上にあるみかん。"
@@ -181,6 +179,8 @@ While ERC1066 codes are stored as a `byte`, in order to provide maximal flexibil
 ### UI Independent
 
 Localization logic should be UI independent in order to maintain consistency across many different interfaces.
+
+The base string format will be UTF-8, as it's compatible with all means of strings including all languages, emojis and special characters.
 
 ### Boolean Return Values
 
